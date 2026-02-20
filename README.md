@@ -1,6 +1,16 @@
 # 📷 截图 OCR 工具
 
+<div align="center">
+
+![Windows](https://img.shields.io/badge/Windows-0078D6?logo=windows&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green)
+
 一个简单易用的截图文字识别工具，支持快捷键触发、长按检测和后台托盘运行。
+
+[🚀 下载最新版](#-下载) | [📖 使用说明](#-使用说明) | [⚙️ 配置指南](#️-配置说明)
+
+</div>
 
 ## ✨ 功能特性
 
@@ -12,16 +22,40 @@
 - 🎯 **后台运行** - 最小化到系统托盘，不占用任务栏
 - 🔑 **API Key 配置** - 首次运行引导配置，支持在设置中修改
 
-## 🚀 快速开始
+## 📥 下载
 
-### 方式一：直接运行 EXE（推荐）
+### Windows 开箱即用版（推荐）
 
-1. 下载 `dist` 文件夹
+<details>
+<summary>📦 点击展开下载选项</summary>
+
+#### 方式一：直接下载 EXE
+
+从 [Releases](https://github.com/YBGuoYang/PaddleOCR_SiliconFlow/releases) 页面下载最新的 `ScreenshotOCR.zip`
+
+#### 方式二：克隆仓库
+
+```bash
+git clone https://github.com/YBGuoYang/PaddleOCR_SiliconFlow.git
+cd PaddleOCR_SiliconFlow/dist
+双击 ScreenshotOCR.exe 运行
+```
+
+</details>
+
+**使用步骤：**
+1. 下载并解压 `ScreenshotOCR.zip`
 2. 双击 `ScreenshotOCR.exe` 运行
 3. 首次运行会弹出配置窗口，输入您的硅基流动 API Key
 4. 程序将在后台运行，按 F9 触发截图
 
-> 获取 API Key：访问 [SiliconFlow](https://cloud.siliconflow.cn/i/sU0OEWTy) 注册账号并创建 API Key
+> 💡 **获取 API Key**：访问 [SiliconFlow](https://cloud.siliconflow.cn/i/sU0OEWTy) 注册账号并创建 API Key
+
+---
+
+## 🚀 快速开始
+
+### 方式一：直接运行 EXE（推荐）
 
 ### 方式二：Python 源码运行
 
@@ -145,6 +179,13 @@ build.bat
 | plyer | 系统通知 |
 | requests | API 请求 |
 
+## 🌟 系统要求
+
+- **操作系统**：Windows 10/11（64位）
+- **内存**：建议 4GB 以上
+- **网络**：需要连接互联网（调用 OCR API）
+- **权限**：建议以管理员权限运行（避免截图偏移问题）
+
 ## ❓ 常见问题
 
 ### Q: 截图区域偏移？
@@ -167,4 +208,23 @@ build.bat
 
 ## 📄 许可证
 
-MIT License
+MIT License - 详见 [LICENSE](LICENSE) 文件
+
+## 🙏 致谢
+
+- [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR) - 强大的 OCR 工具包
+- [SiliconFlow](https://siliconflow.cn) - 提供 OCR API 服务
+
+## 📮 联系方式
+
+如有问题或建议，欢迎提交 [Issue](https://github.com/YBGuoYang/PaddleOCR_SiliconFlow/issues)
+
+---
+
+<div align="center">
+
+**如果这个项目对你有帮助，请给它一个 ⭐️**
+
+Made with ❤️ by [YBGuoYang](https://github.com/YBGuoYang)
+
+</div>
