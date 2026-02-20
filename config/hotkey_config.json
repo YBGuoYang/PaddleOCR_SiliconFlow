@@ -1,0 +1,8 @@
+{
+  "api_key": "your_api_key",
+  "hotkey": "f9",
+  "long_press_time": 1.0,
+  "mode": "long_press",
+  "auto_start": false,
+  "show_notification": true
+}
