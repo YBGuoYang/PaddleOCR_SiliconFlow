@@ -6,7 +6,7 @@ __pycache__/
 .Python
 build/
 develop-eggs/
-dist/
+# dist/  # Commented out to allow tracking dist folder with compiled exe
 downloads/
 eggs/
 .eggs/
