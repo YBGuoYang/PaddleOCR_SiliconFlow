@@ -1,6 +1,15 @@
-' 静默启动 Screenshot OCR Tool (Hotkey Version)
-' 双击此文件将在后台启动程序，不显示终端窗口
-
 Set WshShell = CreateObject("WScript.Shell")
-WshShell.CurrentDirectory = CreateObject("Scripting.FileSystemObject").GetParentFolderName(WScript.ScriptFullName)
-WshShell.Run "pythonw scripts\screenshot_ocr_hotkey.py", 0, False
+Set FSO = CreateObject("Scripting.FileSystemObject")
+
+BaseDir = FSO.GetParentFolderName(WScript.ScriptFullName)
+PythonwPath = FSO.BuildPath(BaseDir, ".venv\Scripts\pythonw.exe")
+ScriptPath = FSO.BuildPath(BaseDir, "scripts\screenshot_ocr_hotkey.py")
+
+If FSO.FileExists(PythonwPath) Then
+    Command = """" & PythonwPath & """ """ & ScriptPath & """"
+Else
+    Command = "pythonw """ & ScriptPath & """"
+End If
+
+WshShell.CurrentDirectory = BaseDir
+WshShell.Run Command, 0, False

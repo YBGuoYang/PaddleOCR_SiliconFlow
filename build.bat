@@ -1,5 +1,9 @@
 @echo off
+setlocal
 chcp 65001 >nul
+set "NO_PAUSE=0"
+if /I "%~1"=="--no-pause" set "NO_PAUSE=1"
+
 echo ========================================
 echo   Screenshot OCR Tool - Build Script
 echo ========================================
@@ -7,8 +11,11 @@ echo.
 
 cd /d "%~dp0"
 
-REM Check PyInstaller
-pip show pyinstaller >nul 2>&1 || pip install pyinstaller
+call setup_env.bat --dev
+if errorlevel 1 (
+    call :maybe_pause
+    exit /b 1
+)
 
 echo.
 echo [Building EXE...]
@@ -20,7 +27,8 @@ if exist "dist" rmdir /s /q "dist"
 if exist "*.spec" del /q "*.spec"
 
 REM Build the EXE with hidden imports and config directory
-pyinstaller --onefile --windowed --name "ScreenshotOCR" ^
+".\.venv\Scripts\python.exe" -m PyInstaller --onefile --windowed --name "ScreenshotOCR" ^
+    --paths "src" ^
     --hidden-import=requests ^
     --hidden-import=urllib3 ^
     --hidden-import=charset_normalizer ^
@@ -38,7 +46,17 @@ pyinstaller --onefile --windowed --name "ScreenshotOCR" ^
     --hidden-import=plyer.platforms ^
     --hidden-import=plyer.platforms.win ^
     --hidden-import=plyer.platforms.win.notification ^
-    --hidden-import=mss ^
+    --hidden-import=screenshot_ocr ^
+    --add-binary "D:\program\BIO\pymol\Library\bin\ffi-8.dll;." ^
+    --add-binary "D:\program\BIO\pymol\Library\bin\libcrypto-3-x64.dll;." ^
+    --add-binary "D:\program\BIO\pymol\Library\bin\libssl-3-x64.dll;." ^
+    --add-binary "D:\program\BIO\pymol\Library\bin\libexpat.dll;." ^
+    --add-binary "D:\program\BIO\pymol\Library\bin\libbz2.dll;." ^
+    --add-binary "D:\program\BIO\pymol\Library\bin\liblzma.dll;." ^
+    --add-binary "D:\program\BIO\pymol\Library\bin\zlib.dll;." ^
+    --add-binary "D:\program\BIO\pymol\Library\bin\zlib1.dll;." ^
+    --add-binary "D:\program\BIO\pymol\Library\bin\tcl86t.dll;." ^
+    --add-binary "D:\program\BIO\pymol\Library\bin\tk86t.dll;." ^
     --add-data "config;config" ^
     scripts\screenshot_ocr_hotkey.py
 
@@ -65,7 +83,15 @@ if exist "dist\ScreenshotOCR.exe" (
     echo To distribute: Copy the entire dist folder
 ) else (
     echo [ERROR] Build failed!
+    call :maybe_pause
+    exit /b 1
 )
 
 echo.
+call :maybe_pause
+exit /b 0
+
+:maybe_pause
+if "%NO_PAUSE%"=="1" exit /b 0
 pause
+exit /b 0
